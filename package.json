@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/wglee0511/practice-gulp#readme",
   "dependencies": {
+    "del": "^6.0.0",
     "gulp-cli": "^2.3.0"
   },
   "devDependencies": {
