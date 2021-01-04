@@ -21,6 +21,7 @@
   "dependencies": {
     "@babel/plugin-transform-regenerator": "^7.12.1",
     "gulp-cli": "^2.3.0",
+    "gulp-image": "^6.2.1",
     "gulp-webserver": "^0.9.1"
   },
   "devDependencies": {
