@@ -1,6 +1,7 @@
-import gulp, { series } from "gulp";
+import gulp from "gulp";
 import gpug from "gulp-pug";
 import del from "del";
+import ws from "gulp-webserver";
 
 const routes = {
     pug:{
@@ -9,15 +10,14 @@ const routes = {
     }
 };
 
-const pug = () => 
-    gulp
-    .src(routes.pug.src)
-    .pipe(gpug())
-    .pipe(gulp.dest(routes.pug.dest));
+const pug = () => gulp.src(routes.pug.src).pipe(gpug()).pipe(gulp.dest(routes.pug.dest));
 
-const clean = () => del("build");
-const prepare = () => gulp.series([clean]);
+const clean = () => del("build/");
 
-const assets = () => gulp.series([pug]);
+const webserver = () => gulp.src("build").pipe(ws({ port: 8000,livereload: true, open: true}));
 
-export const dev = gulp.series([prepare, assets]);
+const prepare = async () => await gulp.series([clean]);
+const assets = async () => await gulp.series([pug]);
+const postDev = async () => await gulp.series([webserver]);
+
+export const dev = gulp.series([prepare, assets, postDev]);
