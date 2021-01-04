@@ -5,19 +5,21 @@ import ws from "gulp-webserver";
 
 const routes = {
     pug:{
+        watch: "src/**/*.pug",
         src: "src/*.pug",
         dest: "build"
     }
 };
 
-const pug = () => gulp.src(routes.pug.src).pipe(gpug()).pipe(gulp.dest(routes.pug.dest));
+const pug = () =>  gulp.src(routes.pug.src).pipe(gpug()).pipe(gulp.dest(routes.pug.dest));
 
-const clean = () => del("build/");
+const clean = () => del("build");
 
-const webserver = () => gulp.src("build").pipe(ws({ port: 8000,livereload: true, open: true}));
+const webserver = () =>  gulp.src("build").pipe(ws({livereload: true, open: true}));
 
-const prepare = async () => await gulp.series([clean]);
-const assets = async () => await gulp.series([pug]);
-const postDev = async () => await gulp.series([webserver]);
+const watch = () => gulp.watch(routes.pug.watch, pug);
 
-export const dev = gulp.series([prepare, assets, postDev]);
+
+
+export const dev = gulp.series(clean, pug, webserver, watch);
+
