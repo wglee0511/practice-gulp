@@ -20,6 +20,7 @@
   "homepage": "https://github.com/wglee0511/practice-gulp#readme",
   "dependencies": {
     "@babel/plugin-transform-regenerator": "^7.12.1",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-cli": "^2.3.0",
     "gulp-image": "^6.2.1",
     "gulp-sass": "^4.1.0",
