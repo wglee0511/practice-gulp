@@ -8,6 +8,9 @@ import autoprefixer from "gulp-autoprefixer";
 import csso from "gulp-csso";
 import bro from "gulp-bro";
 import babalify from "babelify";
+import ghPages from "gulp-gh-pages";
+
+const URL = "https://github.com/wglee0511/practice-gulp";
 
 sass.compiler = require("node-sass");
 
@@ -30,6 +33,9 @@ const routes = {
         watch: "src/js/**/*.js",
         src:"src/js/main.js",
         dest:"build"
+    },
+    gh:{
+        src:"build/**/*"
     }
 
 };
@@ -43,6 +49,7 @@ const script = () => gulp.src(routes.js.src).pipe(bro({transform: [
     babalify.configure({presets:["@babel/preset-env"]}),
     ["uglifyify", {global:true}]
 ]})).pipe(dest(routes.js.dest));
+const gh = () => gulp.src(routes.gh.src).pipe(ghPages());
 
 const watch = () => {
     gulp.watch(routes.pug.watch, pug);
@@ -53,5 +60,5 @@ const watch = () => {
 
 
 
-export const dev = gulp.series([clean, image, pug, style, script,webserver, watch]);
-
+export const dev = gulp.series([clean, image, pug, style, script, webserver, watch]);
+export const deploy = gulp.series([clean, image, pug, style, script, gh]);

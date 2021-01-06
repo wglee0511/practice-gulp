@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "gulp dev",
-    "build": "gulp build"
+    "build": "gulp build",
+    "deploy": "gulp deploy"
+
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "gulp-bro": "^2.0.0",
     "gulp-cli": "^2.3.0",
     "gulp-csso": "^4.0.1",
+    "gulp-gh-pages": "^0.5.4",
     "gulp-image": "^6.2.1",
     "gulp-sass": "^4.1.0",
     "gulp-webserver": "^0.9.1",
